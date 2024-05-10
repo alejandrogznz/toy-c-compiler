@@ -45,6 +45,72 @@ Token Lexer::getToken()
             return Token{";"};
         }
         
+        if (c == '(')
+        {
+            // If there are previous chars read, return the current built string
+            // Otherwise, return ';' token
+            if (s.size() > 0)
+                break;
+            mifs.get(c);
+            return Token{"("};
+        }
+
+        if (c == ')')
+        {
+            // If there are previous chars read, return the current built string
+            // Otherwise, return ';' token
+            if (s.size() > 0)
+                break;
+            mifs.get(c);
+            return Token{")"};
+        }
+        if (c == '{')
+        {
+            // If there are previous chars read, return the current built string
+            // Otherwise, return ';' token
+            if (s.size() > 0)
+                break;
+            mifs.get(c);
+            return Token{"{"};
+        }
+        if (c == '}')
+        {
+            // If there are previous chars read, return the current built string
+            // Otherwise, return ';' token
+            if (s.size() > 0)
+                break;
+            mifs.get(c);
+            return Token{"}"};
+        }
+
+        if (c == '>')
+        {
+            // If there are previous chars read, return the current built string
+            // Otherwise, return ';' token
+            if (s.size() > 0)
+                break;
+            mifs.get(c);
+            return Token{">"};
+        }
+        if (c == '<')
+        {
+            // If there are previous chars read, return the current built string
+            // Otherwise, return ';' token
+            if (s.size() > 0)
+                break;
+            mifs.get(c);
+            return Token{"<"};
+        }
+
+        if (c == '#')
+        {
+            // If there are previous chars read, return the current built string
+            // Otherwise, return ';' token
+            if (s.size() > 0)
+                break;
+            mifs.get(c);
+            return Token{"#"};
+        }
         mifs.get(c);
         s += c;
     }
