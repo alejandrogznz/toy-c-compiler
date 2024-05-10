@@ -10,11 +10,15 @@ EXE = tcc
 
 all: $(EXE)
 
+grind: $(EXE)
+	valgrind ./$(EXE)
+
 $(EXE): $(OBJECTS)
 	$(COMPILER) $^ -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)/
 	$(COMPILER) -c $< -o $@
+
 
 $(OBJ_DIR)/:
 	mkdir $(OBJ_DIR)

@@ -1,12 +1,14 @@
-#include <iostream>
-
 #include "./lex.hpp"
+#include <iostream>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-    TokenType tt = TokenType::If;
-    if (tt == TokenType::If) 
-        cout << "Is If Token" << endl;
+    Lexer lex("sample.cpp");
+    string s;
+
+    while ((s = lex.getToken().getString()) != "")
+        cout << s << endl;
 }
