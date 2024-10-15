@@ -2,26 +2,24 @@
 
 #include "Token.hpp"
 
-#include <string>
+#include <ctype.h>
 #include <fstream>
 #include <iostream>
-#include <ctype.h>
+#include <string>
 
 class Lexer {
-    
-    std::ifstream mifs;
 
-    Lexer() = delete;
+  std::ifstream mifs;
 
-    public:
+  Lexer() = delete;
 
-    Lexer(std::string filename);
+public:
+  Lexer(std::string filename);
 
-    Token getToken();
+  Token getToken();
 
-    ~Lexer();
-    
-    private:
+  ~Lexer();
 
-    char getChar();
+private:
+  char getChar();
 };
