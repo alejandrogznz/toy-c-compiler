@@ -9,7 +9,7 @@ Lexer::~Lexer() {
   }
 }
 
-Token Lexer::getToken() {
+Token *Lexer::getToken() {
   std::string s = "";
   char c;
 
@@ -29,7 +29,7 @@ Token Lexer::getToken() {
 
     // If EOF found, close file
     if (c == EOF) {
-      return Token{"EOF"};
+      return new Token{"EOF"};
     }
 
     // If separator is found, end statement
@@ -39,7 +39,7 @@ Token Lexer::getToken() {
       if (s.size() > 0)
         break;
       mifs.get(c);
-      return Token{";"};
+      return new Token{";"};
     }
 
     if (c == '(') {
@@ -48,7 +48,7 @@ Token Lexer::getToken() {
       if (s.size() > 0)
         break;
       mifs.get(c);
-      return Token{"("};
+      return new Token{"("};
     }
 
     if (c == ')') {
@@ -57,7 +57,7 @@ Token Lexer::getToken() {
       if (s.size() > 0)
         break;
       mifs.get(c);
-      return Token{")"};
+      return new Token{")"};
     }
     if (c == '{') {
       // If there are previous chars read, return the current built string
@@ -65,7 +65,7 @@ Token Lexer::getToken() {
       if (s.size() > 0)
         break;
       mifs.get(c);
-      return Token{"{"};
+      return new Token{"{"};
     }
     if (c == '}') {
       // If there are previous chars read, return the current built string
@@ -73,7 +73,7 @@ Token Lexer::getToken() {
       if (s.size() > 0)
         break;
       mifs.get(c);
-      return Token{"}"};
+      return new Token{"}"};
     }
 
     if (c == '>') {
@@ -82,7 +82,7 @@ Token Lexer::getToken() {
       if (s.size() > 0)
         break;
       mifs.get(c);
-      return Token{">"};
+      return new Token{">"};
     }
     if (c == '<') {
       // If there are previous chars read, return the current built string
@@ -90,7 +90,7 @@ Token Lexer::getToken() {
       if (s.size() > 0)
         break;
       mifs.get(c);
-      return Token{"<"};
+      return new Token{"<"};
     }
 
     if (c == '#') {
@@ -99,17 +99,17 @@ Token Lexer::getToken() {
       if (s.size() > 0)
         break;
       mifs.get(c);
-      return Token{"#"};
+      return new Token{"#"};
     }
     mifs.get(c);
     s += c;
   }
 
   if (mifs.eof()) {
-    return Token{"EOF"};
+    return new Token{"EOF"};
   }
 
-  return Token{s};
+  return new Token{s};
 }
 
 char Lexer::getChar() {

@@ -1,4 +1,5 @@
 #include "Token.hpp"
+#include <cstdlib>
 
 Token::Token() {}
 
@@ -10,17 +11,51 @@ Token::Token(std::string s) : tokenString(s) {
     this->tokenType = TokenType::LEFT_PAREN;
   } else if (this->tokenString == ")") {
     this->tokenType = TokenType::RIGHT_PAREN;
+  } else if (this->tokenString == "int") {
+    this->tokenType = TokenType::INT;
   } else if (this->tokenString == "EOF") {
     this->tokenType = TokenType::eof;
     std::cout << "Found EOF" << std::endl;
+  } else {
+    this->tokenType = TokenType::ERROR;
   }
 }
 
-const std::string Token::getString() { return tokenString; }
+std::string Token::getString() const { return tokenString; }
 
+std::string Token::getTypeString() const {
+  TokenType tt = TokenType::ERROR;
+  tt = this->tokenType;
+  switch (tt) {
+  case TokenType::INT:
+    return "int";
+  default:
+    std::cout << "Unknown Token from " + this->tokenString << std::endl;
+    exit(0);
+  }
+  return "";
+}
 TokenType Token::getType() { return tokenType; }
 
 std::ostream &operator<<(std::ostream &os, const Token &t) {
-  os << t.tokenString << " ";
+
+  os << "Value: \"" << t.tokenString << "\" Type: " << t.getTypeString();
   return os;
+}
+
+// Token Vector
+Token *TokenVector::push_back(Token *t) {
+  tokenVector.push_back(t);
+  return t;
+}
+
+std::vector<Token *>::iterator TokenVector::begin() {
+  return tokenVector.begin();
+}
+
+std::vector<Token *>::iterator TokenVector::end() { return tokenVector.end(); }
+TokenVector::~TokenVector() {
+  for (Token *t : tokenVector) {
+    delete t;
+  }
 }

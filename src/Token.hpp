@@ -2,8 +2,10 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 enum class TokenType {
+  ERROR,
   // Single Character Tokens
   NNULL,
   LEFT_PAREN,
@@ -21,7 +23,7 @@ enum class TokenType {
   // Literals
   //
   // Keywords
-  //
+  INT,
   // EOF
   eof
 };
@@ -39,9 +41,32 @@ public:
 
   Token(std::string s);
 
-  const std::string getString();
+  std::string getString() const;
+
+  std::string getTypeString() const;
 
   TokenType getType();
 
   friend std::ostream &operator<<(std::ostream &os, const Token &t);
+};
+
+class TokenVector {
+
+public:
+  std::vector<Token *> tokenVector;
+
+  TokenVector() = default;
+
+  Token *push_back(Token *t);
+
+  // TODO Implement TokenVector::pop_back
+  bool pop_back();
+
+  std::vector<Token *>::iterator begin();
+
+  std::vector<Token *>::iterator end();
+
+  ~TokenVector();
+
+private:
 };

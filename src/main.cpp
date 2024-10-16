@@ -9,14 +9,16 @@ using namespace std;
 int main() {
   Lexer lex("sample.cpp");
   string s;
-  vector<Token> tv;
-  Token t;
+  Token *t;
+  TokenVector tv;
   while (true) {
     t = lex.getToken();
-    cout << t << endl;
-    if (t.getString() == "EOF") {
-      cout << "End of File" << endl;
+    tv.push_back(t);
+    if (t->getString() == "EOF") {
       break;
     }
   }
+  for (auto it : tv.tokenVector)
+    cout << *it << endl;
+  return 0;
 }

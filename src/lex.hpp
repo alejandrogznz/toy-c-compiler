@@ -16,7 +16,7 @@ class Lexer {
 public:
   Lexer(std::string filename);
 
-  Token getToken();
+  Token *getToken();
 
   ~Lexer();
 
