@@ -19,11 +19,12 @@ enum class TokenType {
   SEMICOLON,
 
   // One or Two Character Tokens
-
+  ID,
   // Literals
   //
   // Keywords
   INT,
+  RETURN,
   // EOF
   eof
 };

@@ -11,13 +11,19 @@ Token::Token(std::string s) : tokenString(s) {
     this->tokenType = TokenType::LEFT_PAREN;
   } else if (this->tokenString == ")") {
     this->tokenType = TokenType::RIGHT_PAREN;
+  } else if (this->tokenString == "{") {
+    this->tokenType = TokenType::LEFT_BRACE;
+  } else if (this->tokenString == "}") {
+    this->tokenType = TokenType::RIGHT_BRACE;
   } else if (this->tokenString == "int") {
     this->tokenType = TokenType::INT;
+  } else if (this->tokenString == "return") {
+    this->tokenType = TokenType::RETURN;
   } else if (this->tokenString == "EOF") {
     this->tokenType = TokenType::eof;
     std::cout << "Found EOF" << std::endl;
   } else {
-    this->tokenType = TokenType::ERROR;
+    this->tokenType = TokenType::ID;
   }
 }
 
@@ -27,8 +33,24 @@ std::string Token::getTypeString() const {
   TokenType tt = TokenType::ERROR;
   tt = this->tokenType;
   switch (tt) {
+  case TokenType::ID:
+    return "ID";
   case TokenType::INT:
     return "int";
+
+  case TokenType::LEFT_PAREN:
+    return "LEFT_PAREN";
+
+  case TokenType::RIGHT_PAREN:
+    return "RIGHT_PAREN";
+  case TokenType::LEFT_BRACE:
+    return "LEFT_BRACE";
+  case TokenType::RIGHT_BRACE:
+    return "RIGHT_BRANCE";
+  case TokenType::RETURN:
+    return "RETURN";
+  case TokenType::eof:
+    return "EOF";
   default:
     std::cout << "Unknown Token from " + this->tokenString << std::endl;
     exit(0);
